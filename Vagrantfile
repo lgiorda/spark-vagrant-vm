@@ -14,7 +14,8 @@ Vagrant::Config.run do |config|
     puppet.manifests_path = "."
     puppet.manifest_file = "site.pp"
   end
-
+	
+  config.vm.forward_port 9999, 9999
   config.vm.forward_port 8080, 8080
   config.vm.forward_port 8081, 8081
   config.vm.forward_port 50070, 50070
