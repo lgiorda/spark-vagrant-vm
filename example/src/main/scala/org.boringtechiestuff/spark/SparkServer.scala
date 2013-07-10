@@ -10,6 +10,16 @@ import unfiltered.response.ResponseString
  *
  * What exactly does the SparkEnv.get/set function do, and why call them on
  * each route access?
+ *
+ *
+ *
+    vagrant ssh
+
+    hadoop fs -mkdir /lib
+    hadoop fs -put /vagrant/target/scala-2.9.3/spark-assembly-1-SNAPSHOT.jar /lib
+
+    java -cp /vagrant/target/scala-2.9.3/spark-assembly-1-SNAPSHOT.jar org.boringtechiestuff.spark.SparkServer
+
  */
 
 object SparkServer extends SparkApp with unfiltered.filter.Plan {
