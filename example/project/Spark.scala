@@ -31,6 +31,11 @@ object Spark extends Build {
         "org.spark-project" %% "spark-bagel" % "0.7.2" exclude("org.apache.hadoop", "hadoop-core"),
         "org.spark-project" %% "spark-streaming" % "0.7.2" exclude("org.apache.hadoop", "hadoop-core"),
 
+        // Unfiltered deps
+	      "net.databinder" %% "unfiltered-filter" % "0.6.8",
+  	    "net.databinder" %% "unfiltered-jetty" % "0.6.8",
+  	    "net.databinder" %% "unfiltered-spec" % "0.6.8" % "test",
+
         "org.json4s" %% "json4s-native" % "3.2.4",
         "ch.qos.logback" % "logback-classic" % "1.0.13"
       ),
@@ -38,6 +43,7 @@ object Spark extends Build {
       mergeStrategy in assembly <<= (mergeStrategy in assembly) { (current) =>
         {
           // Hack together some dependency nonsenses into a fatjar.
+          case s: String if s.endsWith("plugin.properties") => MergeStrategy.first
           case s: String if s.startsWith("javax/servlet") => MergeStrategy.first
           case s: String if s.startsWith("org/apache/jasper") => MergeStrategy.first
           case s: String if s.startsWith("org/apache/commons/beanutils") => MergeStrategy.first
